@@ -60,10 +60,13 @@ def remove_punct(text):
 
 
 def normalise_input(user_input):
-    user_input = remove_punct(user_input)
-    user_input = remove_spaces(user_input)
-    user_input = user_input.lower()
-    return user_input
+    no_punct = remove_punct(user_input).lower()
+    whitespace = no_punct.split()
+
+    filtered = filter_words(whitespace, skip_words)
+    return filtered
+
+    
     """This function removes all punctuation from the string and converts it to
     lower case. It then splits the string into a list of words (also removing
     any extra spaces between words) and further removes all "unimportant"
@@ -89,7 +92,7 @@ def normalise_input(user_input):
 
     """
     # Remove punctuation and convert to lower case
-    no_punct = remove_punct(user_input).lower()
+
 
     #
     # COMPLETE ME!
