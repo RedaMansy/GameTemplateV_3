@@ -28,7 +28,7 @@ def remove_punct(text):
     
     
 def remove_spaces(text):
-    word = text.strip()
+    word = text.replace(" ", "")
 
     return word
     """This function is used to remove leading and trailing spaces from a string.
