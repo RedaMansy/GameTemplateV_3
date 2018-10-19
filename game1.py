@@ -1,17 +1,10 @@
 #!/usr/bin/python3
 
-from map import rooms
+from map1 import rooms
 import string
 
 
 def remove_punct(text):
-    word = ""
-    for letter in text:
-        if letter.isalpha() == True:
-            word  = word + letter
-        elif letter == " ":
-            word = word + letter
-    return word
     """This function is used to remove all punctuation
     marks from a string. Spaces do not count as punctuation and should
     not be removed. The funcion takes a string and returns a new string
@@ -23,14 +16,19 @@ def remove_punct(text):
     ' Hey  Yes'
     >>> remove_punct(",go!So.?uTh")
     'goSouTh'
-    """
+    """    
+    word = ""
+    for letter in text:
+        if letter.isalpha() == True:
+            word  = word + letter
+        elif letter == " ":
+            word = word + letter
+    return word
+
     pass # The pass statement does nothing. Replace it with the body of your function.
     
     
 def remove_spaces(text):
-    word = text.strip()
-
-    return word
     """This function is used to remove leading and trailing spaces from a string.
     It takes a string and returns a new string with does not have leading and
     trailing spaces. For example:
@@ -45,14 +43,14 @@ def remove_spaces(text):
     ''
     >>> remove_spaces("   ")
     ''
-    """
+    """    
+    word = text.strip()
+
+    return word
+
 
 
 def normalise_input(user_input):
-    user_input = remove_punct(user_input)
-    user_input = remove_spaces(user_input)
-    user_input = user_input.lower()
-    return user_input
     """This function removes all punctuation, leading and trailing
     spaces from a string, and converts the string to lower case.
     For example:
@@ -63,19 +61,16 @@ def normalise_input(user_input):
     'take lamp'
     >>> normalise_input("HELP!!!!!!!")
     'help'
-    """
+    """    
+    user_input = remove_punct(user_input)
+    user_input = remove_spaces(user_input)
+    user_input = user_input.lower()
+    return user_input
+
     pass
 
     
 def display_room(room):
-
-    print("")
-    print(room["name"])
-    print("")
-    print(room["description"])
-    print("")
-    
-
     """This function takes a room as an input and nicely displays its name
     and description. The room argument is a dictionary with entries "name",
     "description" etc. (see map.py for the definition). The name of the room
@@ -95,10 +90,17 @@ def display_room(room):
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
     # pass # The pass statement does nothing. Replace it with the body of your function.
+    print("")
+    print(room["name"].upper())
+    print("")
+    print(room["description"])
+    print("")
+    
+
+
 
     
 def exit_leads_to(exits, direction):
-    return rooms[exits[direction]]['name']
     """This function takes a dictionary of exits and a direction (a particular
     exit taken from this dictionary). It returns the name of the room into which
     this exit leads. For example:
@@ -109,11 +111,12 @@ def exit_leads_to(exits, direction):
     "your personal tutor's office"
     >>> exit_leads_to(rooms["Tutor"]["exits"], "west")
     'Reception'
-    """
+    """    
+    return rooms[exits[direction]]['name']
+
     
 
 def print_menu_line(direction, leads_to): 
-    print("Go " + str(direction.upper()) + " to " + str(leads_to))
     """This function prints a line of a menu of exits. It takes two strings: a
     direction (the name of an exit) and the name of the room into which it
     leads (leads_to), and should print a menu line in the following format:
@@ -125,7 +128,9 @@ def print_menu_line(direction, leads_to):
     Go EAST to you personal tutor's office.
     >>> print_menu_line("south", "MJ and Simon's room")
     Go SOUTH to MJ and Simon's room.
-    """
+    """    
+    print("Go " + str(direction.upper()) + " to " + str(leads_to) + '.')
+
     pass
 
 
@@ -161,10 +166,6 @@ def print_menu(exits):
 
 
 def is_valid_exit(exits, user_input):
-    if user_input in exits:
-        return True
-    else:
-        return False
     """This function checks, given a dictionary "exits" (see map.py) and
     a players's choice "user_input" whether the player has chosen a valid exit.
     It returns True if the exit is valid, and False otherwise. Assume that
@@ -179,7 +180,12 @@ def is_valid_exit(exits, user_input):
     False
     >>> is_valid_exit(rooms["Parking"]["exits"], "east")
     True
-    """
+    """    
+    if user_input in exits:
+        return True
+    else:
+        return False
+
 
 
 def menu(exits):
@@ -218,9 +224,6 @@ def menu(exits):
 
 
 def move(exits, direction):
-    room = rooms[exits[direction]]
-    return room
-
     """This function returns the room into which the player will move if, from a
     dictionary "exits" of avaiable exits, they choose to move towards the exit
     with the name given by "direction". For example:
@@ -231,7 +234,11 @@ def move(exits, direction):
     True
     >>> move(rooms["Reception"]["exits"], "west") == rooms["Office"]
     False
-    """
+    """    
+    room = rooms[exits[direction]]
+    return room
+
+
     pass
 
 
