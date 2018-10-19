@@ -8,13 +8,6 @@ from gameparser import *
 
 
 def list_of_items(items):
-    store_string = ''
-    for value in items:
-        if value == items[-1]:
-            store_string = store_string + value['name']
-            break
-        store_string = store_string + value['name'] + ', '
-    return store_string
     """This function takes a list of items (see items.py for the definition) and
     returns a comma-separated list of item names (as a string). For example:
 
@@ -30,14 +23,19 @@ def list_of_items(items):
     >>> list_of_items([item_money, item_handbook, item_laptop])
     'money, a student handbook, laptop'
 
-    """
+    """    
+    store_string = ''
+    for value in items:
+        if value == items[-1]:
+            store_string = store_string + value['name']
+            break
+        store_string = store_string + value['name'] + ', '
+    return store_string
+
     pass
 
 
 def print_room_items(room):
-    print_items = list_of_items(room['items'])
-    if print_items:
-        print('There is '+ print_items + ' here\n')
     """This function takes a room as an input and nicely displays a list of items
     found in this room (followed by a blank line). If there are no items in
     the room, nothing is printed. See map.py for the definition of a room, and
@@ -58,18 +56,15 @@ def print_room_items(room):
 
     Note: <BLANKLINE> here means that doctest should expect a blank line.
 
-    """
+    """    
+    print_items = list_of_items(room['items'])
+    if print_items:
+        print('There is '+ print_items + ' here' + '.\n')
+
     pass
 
 
 def print_inventory_items(items):
-    store_string = ''
-    for value in items:
-        if value == items[-1]:
-            store_string = store_string + value['name'] + '.\n'
-            break
-        store_string = store_string + value['name'] + ', '
-    print('You have ' + store_string)
     """This function takes a list of inventory items and displays it nicely, in a
     manner similar to print_room_items(). The only difference is in formatting:
     print "You have ..." instead of "There is ... here.". For example:
@@ -78,7 +73,15 @@ def print_inventory_items(items):
     You have id card, laptop, money.
     <BLANKLINE>
 
-    """
+    """    
+    store_string = ''
+    for value in items:
+        if value == items[-1]:
+            store_string = store_string + value['name'] + '.\n'
+            break
+        store_string = store_string + value['name'] + ', '
+    print('You have ' + store_string)
+
     pass
 
 
